@@ -65,7 +65,7 @@ func actionDefine(d *dictionary.Dictionary, reader *bufio.Reader) {
 		return
 	}
 
-	fmt.Printf("Definition of %s: %s\n", word, entry)
+	fmt.Printf("Definition of %s: %s\n", word, entry.Definition)
 }
 
 func actionRemove(d *dictionary.Dictionary, reader *bufio.Reader) {
@@ -78,15 +78,15 @@ func actionRemove(d *dictionary.Dictionary, reader *bufio.Reader) {
 }
 
 func actionList(d *dictionary.Dictionary) {
-	entries := d.List()
+	words, entries := d.List()
 
-	if len(entries) == 0 {
+	if len(words) == 0 {
 		fmt.Println("The dictionary is empty.")
 		return
 	}
 
 	fmt.Println("Words and Definitions:")
-	for word, entry := range entries {
-		fmt.Printf("%s: %s\n", word, entry)
+	for _, word := range words {
+		fmt.Printf("%s: %s\n", word, entries[word].Definition)
 	}
 }
